@@ -1,0 +1,5 @@
+ID,empno,name,email,department,hourlyrate,skills
+3fa85f64-5717-4562-b3fc-2c963f66afa1,E001,Rajesh Kumar,rajesh@example.com,Development,1200.000,NodeJS
+7c9e6679-7425-40de-944b-e07fc1f90ae,E002,Priya Sharma,priya@example.com,Testing,950.000,Automation
+1b4e28ba-2fa1-11d2-883f-0016d3cca427,E003,Arun Prakash,arun@example.com,Management,1500.000,SAP CAP
+9f8c7d6e-5b4a-4321-9876-abcdef123456,E004,Divya Nair,divya@example.com,Development,1100.000,Fiori
