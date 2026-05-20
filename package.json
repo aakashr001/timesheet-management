@@ -10,13 +10,15 @@
   },
   "scripts": {
     "start": "cds-serve",
-    "watch-employeetimesheet": "cds watch --open timesheet.employeetimesheet/index.html?sap-ui-xx-viewCache=false --livereload false"
+    "watch-employeetimesheet": "cds watch --open timesheet.employeetimesheet/index.html?sap-ui-xx-viewCache=false --livereload false",
+    "watch-managerapp": "cds watch --open managerapp/index.html?sap-ui-xx-viewCache=false --livereload false"
   },
   "private": true,
   "workspaces": [
     "app/*"
   ],
   "sapux": [
-    "app/employeetimesheet"
+    "app/employeetimesheet",
+    "app/managerapp"
   ]
 }

@@ -32,7 +32,8 @@ entity Employees : managed {
         email      : String;
         department : String;
         hourlyrate : Decimal(16, 3);
-        skills     : String
+        skills     : String;
+        utilization_computed : Decimal(5,2);
 
 };
 
@@ -42,12 +43,16 @@ entity Projects : managed {
         projectcode    : String;
         name           : String;
         client         : String;
-        startdate      : String;
-        enddate        : String;
+        startdate      : Date;
+        enddate        : Date;
         budget         : Decimal(16, 3);
 
         projectmanager : Association to Employees;
         status         : projectstatus;
+        actualbudget_computed : Decimal(16,3);
+variance_computed : Decimal(16,3);
+workpackages : Association to many Workpackages
+                   on workpackages.project = $self;
 };
 
 
@@ -60,8 +65,10 @@ entity Workpackages : managed {
         actualhours_computed : Decimal(5, 2);
         status               : workpackagestatus;
         assignedto           : Association to Employees;
-        timesheetEntries     : Association to TimesheetEntries;
+      timesheetEntries : Association to many TimesheetEntries
+    on timesheetEntries.workpackages = $self;
         project : Association to Projects;
+        
 
 }
 
