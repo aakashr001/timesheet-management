@@ -11,13 +11,26 @@ module.exports = cds.service.impl(async function () {
     
 const cds = require('@sap/cds')
 
+   this.after('READ', 'Timesheets', (data) => {
 
+    const rows = Array.isArray(data) ? data : [data];
+
+    for (const row of rows) {
+
+        row.statusCriticality =
+            row.status === 'Approved' ? 3 :
+            row.status === 'Submitted' ? 2 :
+            row.status === 'Rejected' ? 1 :
+            row.status ==='Draft'?5:
+            0;
+    }
+});
 
     this.before('submitTimesheet', async (req) => {
 
         const ID = req.params[0].ID
 
-        // Check timesheet exists
+    
         const isvalid = await SELECT.one
             .from(Timesheets)
             .where({ ID })
@@ -26,19 +39,19 @@ const cds = require('@sap/cds')
             return req.error(404, 'Timesheet not found')
         }
 
-        // Fetch entries
+     
         const entries = await SELECT
             .from(TimesheetEntries)
             .where({ timesheet_ID: ID })
 
-        // Calculate total hours
+     
         let totalhours = 0
 
         for (const entry of entries) {
 
             totalhours += Number(entry.hours)
 
-            // Validate workpackage
+           
             const wp = await SELECT.one
                 .from(Workpackages)
                 .where({ ID: entry.workpackages_ID })
@@ -48,14 +61,13 @@ const cds = require('@sap/cds')
             }
         }
 
-        // Update computed total
+      
         await UPDATE(Timesheets)
             .set({
                 totalhours_computed: totalhours
             })
             .where({ ID })
 
-        // Validation
         if (totalhours < 1) {
             return req.error(400, 'Total hours must be greater than 0')
         }
@@ -67,22 +79,34 @@ const cds = require('@sap/cds')
     })
 
 
-    this.on('submitTimesheet', 'Timesheets', async (req) => {
+    this.on('submitTimesheet', Timesheets, async (req) => {
 
-        const ID = req.params[0].ID
+        const ID = req.params[0].ID;
 
-        await UPDATE(Timesheets)
-            .set({
-                status: 'Submitted'
-            })
-            .where({ ID })
+        const tx = cds.transaction(req);
 
-        const updatedvalue = await SELECT.one
-            .from(Timesheets)
-            .where({ ID })
+        const timesheet = await tx.run(
+            SELECT.one.from(Timesheets).where({ ID })
+        );
 
-        return updatedvalue
-    })
+        if (!timesheet) {
+            req.error(404, 'Timesheet not found');
+        }
+
+        if (timesheet.status !== 'Draft') {
+            req.error(400, 'Only Draft timesheets can be submitted');
+        }
+
+        await tx.run(
+            UPDATE(Timesheets)
+                .set({
+                    status : 'Submitted'
+                })
+                .where({ ID })
+        );
+
+        return 'Timesheet Submitted Successfully';
+    });
 
     this.on('approveTimesheet', 'Timesheets', async (req) => {
 

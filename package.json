@@ -11,7 +11,9 @@
   "scripts": {
     "start": "cds-serve",
     "watch-employeetimesheet": "cds watch --open timesheet.employeetimesheet/index.html?sap-ui-xx-viewCache=false --livereload false",
-    "watch-managerapp": "cds watch --open managerapp/index.html?sap-ui-xx-viewCache=false --livereload false"
+    "watch-managerapp": "cds watch --open managerapp/index.html?sap-ui-xx-viewCache=false --livereload false",
+    "watch-project1": "cds watch --open project1/index.html?sap-ui-xx-viewCache=false --livereload false",
+    "watch-mnagerdashboard": "cds watch --open mnagerdashboard/index.html?sap-ui-xx-viewCache=false --livereload false"
   },
   "private": true,
   "workspaces": [
@@ -19,6 +21,8 @@
   ],
   "sapux": [
     "app/employeetimesheet",
-    "app/managerapp"
+    "app/managerapp",
+    "app/project1",
+    "app/mnagerdashboard"
   ]
 }

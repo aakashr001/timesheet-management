@@ -34,6 +34,7 @@ entity Employees : managed {
         hourlyrate : Decimal(16, 3);
         skills     : String;
         utilization_computed : Decimal(5,2);
+        projects:Association to Projects;
 
 };
 
@@ -47,12 +48,13 @@ entity Projects : managed {
         enddate        : Date;
         budget         : Decimal(16, 3);
 
-        projectmanager : Association to Employees;
+        
         status         : projectstatus;
         actualbudget_computed : Decimal(16,3);
 variance_computed : Decimal(16,3);
-workpackages : Association to many Workpackages
+workpackages : Composition of many Workpackages
                    on workpackages.project = $self;
+             employee:Association to  many  Employees on employee.projects=$self      
 };
 
 
@@ -81,15 +83,16 @@ entity Timesheets : managed {
 
         weekstartdate       : Date;
 
-        status              : timesheetstatus;
+        status              : timesheetstatus default 'Draft';
 
-        totalhours_computed : Decimal(5, 2);
+        totalhours_computed : Decimal(5, 2) default 0;
 
         approvedby          : Association to Employees;
 
         entries             : Composition of many TimesheetEntries
                                   on entries.timesheet = $self;
-         comments: String
+         comments: String;
+                virtual statusCriticality : Integer;
 
 
 }
@@ -108,3 +111,6 @@ entity TimesheetEntries : managed {
 
         workpackages : Association to Workpackages
 }
+
+
+

@@ -1,0 +1,170 @@
+{
+  "_version": "1.84.0",
+  "sap.app": {
+    "id": "mnagerdashboard",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:lrop",
+      "version": "1.24.0",
+      "toolsId": "db964a7a-1d7c-4dce-91be-89fa3badecc7"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/odata/v4/project/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "odataVersion": "4.01"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.148.0",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.fe.templates": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "mnagerdashboard.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
+      "@i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "uri": "i18n/i18n.properties"
+      }
+    },
+    "resources": {
+      "css": []
+    },
+    "routing": {
+      "config": {},
+      "routes": [
+        {
+          "pattern": ":?query:",
+          "name": "TimesheetsList",
+          "target": "TimesheetsList"
+        },
+        {
+          "pattern": "Timesheets({key}):?query:",
+          "name": "TimesheetsObjectPage",
+          "target": "TimesheetsObjectPage"
+        },
+        {
+          "pattern": "Timesheets({key})/entries({key2}):?query:",
+          "name": "TimesheetEntriesObjectPage",
+          "target": "TimesheetEntriesObjectPage"
+        }
+      ],
+      "targets": {
+        "TimesheetsList": {
+          "type": "Component",
+          "id": "TimesheetsList",
+          "name": "sap.fe.templates.ListReport",
+          "options": {
+            "settings": {
+              "contextPath": "/Timesheets",
+              "initialLoad":true,
+              "variantManagement": "Page",
+              "navigation": {
+                "Timesheets": {
+                  "detail": {
+                    "route": "TimesheetsObjectPage"
+                  }
+                }
+              },
+              "controlConfiguration": {
+                "@com.sap.vocabularies.UI.v1.LineItem": {
+                  "tableSettings": {
+                    "type": "ResponsiveTable"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "TimesheetsObjectPage": {
+          "type": "Component",
+          "id": "TimesheetsObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "editableHeaderContent": false,
+              "contextPath": "/Timesheets",
+              "navigation": {
+                "entries": {
+                  "detail": {
+                    "route": "TimesheetEntriesObjectPage"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "TimesheetEntriesObjectPage": {
+          "type": "Component",
+          "id": "TimesheetEntriesObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "editableHeaderContent": false,
+              "contextPath": "/Timesheets/entries"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sap.fiori": {
+    "registrationIds": [],
+    "archeType": "transactional"
+  },
+  "sap.fe": {
+    "app": {
+      "enableLazyLoading": true
+    }
+  }
+}
