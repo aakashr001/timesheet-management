@@ -96,7 +96,6 @@ entity Timesheets : managed {
 
 
 }
-
 entity TimesheetEntries : managed {
 
     key ID           : UUID;

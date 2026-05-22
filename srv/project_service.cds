@@ -15,7 +15,12 @@ service ProjectService {
     };
 
 
-  
+  @restrict:[
+    {
+        grant:['*'],
+        to:'Manager'
+    }
+  ]
     entity Timesheets as projection on db.Timesheets {
         *,
         entries

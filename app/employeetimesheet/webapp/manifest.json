@@ -115,7 +115,7 @@
           "options": {
             "settings": {
               "contextPath": "/Timesheets",
-              "initialLoad":"Enabled",
+              "initialLoad": "Enabled",
               "variantManagement": "Page",
               "navigation": {
                 "Timesheets": {
@@ -156,5 +156,9 @@
     "app": {
       "enableLazyLoading": true
     }
+  },
+  "sap.cloud": {
+    "public": true,
+    "service": "timesheet.service"
   }
 }

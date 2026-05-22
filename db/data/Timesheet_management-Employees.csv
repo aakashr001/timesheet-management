@@ -3,3 +3,9 @@ ID,empno,name,email,department,hourlyrate,skills
 7c9e6679-7425-40de-944b-e07fc1f90ae,E002,Priya Sharma,priya@example.com,Testing,950.000,Automation
 1b4e28ba-2fa1-11d2-883f-0016d3cca427,E003,Arun Prakash,arun@example.com,Management,1500.000,SAP CAP
 9f8c7d6e-5b4a-4321-9876-abcdef123456,E004,Divya Nair,divya@example.com,Development,1100.000,Fiori
+6ba7b810-9dad-11d1-80b4-00c04fd430c8,E005,Karthik Reddy,karthik@example.com,Development,1250.000,Java
+16fd2706-8baf-433b-82eb-8c7fada847da,E006,Sneha Iyer,sneha@example.com,Testing,980.000,Manual Testing
+123e4567-e89b-12d3-a456-426614174000,E007,Vikram Singh,vikram@example.com,Management,1600.000,Project Management
+550e8400-e29b-41d4-a716-446655440000,E008,Meera Joshi,meera@example.com,Development,1150.000,ReactJS
+f47ac10b-58cc-4372-a567-0e02b2c3d479,E009,Rohan Das,rohan@example.com,Support,850.000,Customer Support
+c9bf9e57-1685-4c89-bafb-ff5af830be8a,E010,Anjali Menon,anjali@example.com,Development,1300.000,SAP UI5

@@ -24,6 +24,18 @@
           "odataVersion": "4.01"
         }
       }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "mnagerdashboard-display": {
+          "semanticObject": "mnagerdashboard",
+          "action": "display",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
+        }
+      }
     }
   },
   "sap.ui": {
@@ -107,7 +119,7 @@
           "options": {
             "settings": {
               "contextPath": "/Timesheets",
-              "initialLoad":true,
+              "initialLoad": true,
               "variantManagement": "Page",
               "navigation": {
                 "Timesheets": {
@@ -166,5 +178,9 @@
     "app": {
       "enableLazyLoading": true
     }
+  },
+  "sap.cloud": {
+    "public": true,
+    "service": "timesheet.service"
   }
 }
