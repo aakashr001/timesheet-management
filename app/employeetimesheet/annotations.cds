@@ -46,7 +46,11 @@ annotate service.Timesheets with @(
         }
     ],
 
-
+//    UI.PresentationVariant  : {
+//     Visualizations : [
+//         '@UI.Chart#ExpenseChart'
+//     ]
+// },
     UI.FieldGroup #GeneratedGroup: {
 
         $Type: 'UI.FieldGroupType',
@@ -246,3 +250,4 @@ annotate service.Timesheets with {
     comments            @Common.FieldControl: #ReadOnly;
 
 };
+
